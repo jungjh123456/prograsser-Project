@@ -33,7 +33,6 @@ export default function Signup({ onSign }) {
       for (let [key, value] of formData.entries()) {
         obj[key] = value;
       }
-      console.log(obj);
       onSign(obj);
     },
     [onSign],
