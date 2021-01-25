@@ -1,14 +1,10 @@
-# f리엑트를 활용한 Routine APP 만들기
-
-
+# 리엑트를 활용한 Routine APP 만들기
 
 Routine이란 루틴은 규칙적으로 하는 일의 통상적인 순서와 방법이고 자신이 원하는 습관을 만들어 나갈 수 있도록 도와주는 루틴 앱이다.
 
 ## 사용 기술 스택
 
 ![image-20201230212116614](./img/stack.png)
-
-
 
 ## Login PAGE
 
@@ -28,18 +24,18 @@ Routine이란 루틴은 규칙적으로 하는 일의 통상적인 순서와 방
    => 회원가입 항목의 하나씩 선택해서 사용하는 것은 비효율적이라 생각하고 고민하면서 찾아본 결과 FormData라는 form안에서 Submit이 발생하면 데이터를 가져오는 것이 있어서 사용하였습니다.
 
 ```js
- const Submit = useCallback(
-    e => {
-      e.preventDefault();
-      const obj = {};
-      const formData = new FormData(e.target);
-      for (let [key, value] of formData.entries()) {
-        obj[key] = value;
-      }
-      onSign(obj);
-    },
-    [onSign],
-  );
+const Submit = useCallback(
+  e => {
+    e.preventDefault();
+    const obj = {};
+    const formData = new FormData(e.target);
+    for (let [key, value] of formData.entries()) {
+      obj[key] = value;
+    }
+    onSign(obj);
+  },
+  [onSign],
+);
 ```
 
 이 밖에 이메일 유효성 검사와 비밀번호 확인 체크 이 것은 useRef를 사용을 하였습니다.
@@ -49,7 +45,7 @@ Routine이란 루틴은 규칙적으로 하는 일의 통상적인 순서와 방
 ![image-20201230212116614](./img/Main.png)
 
 1. 현재 날짜를 보여주는 부분은 react-moment 라이브러리로 구현
-2. '평온한 오후' 이 부분을 보여주는 영역은 새로고침시 랜덤으로 메시지를 보이게 구현 보여줄 여러 메시지를 배열에 넣고 랜덤 함수를 사용 
+2. '평온한 오후' 이 부분을 보여주는 영역은 새로고침시 랜덤으로 메시지를 보이게 구현 보여줄 여러 메시지를 배열에 넣고 랜덤 함수를 사용
 
 ```js
 const nowTime =
@@ -84,23 +80,19 @@ const randomItem = messages[Math.floor(Math.random() * messages.length)];
 
 ```js
 const onAlarmChange = alarm => {
-    setAlarm(alarm);
-    audio.current.src = `./audio/${alarm}.mp3`;
-    audio.current.play();
-  };
+  setAlarm(alarm);
+  audio.current.src = `./audio/${alarm}.mp3`;
+  audio.current.play();
+};
 ```
-
-
 
 ## 프로젝트 기여한 기능
 
-1.  Redux와 saga를 이용해 액션 생성 및 비동기 로직 
-2. 루틴 메인 페이지 SCSS를 이용한 스타일링
-3. 새로고침 시 store에 있는 데이터가 날라가는 현상 수정
-4. 회원가입 이메일 체크, 비밀번호 체크 와 스타일링 
+1.  Redux와 saga를 이용해 액션 생성 및 비동기 로직
+2.  루틴 메인 페이지 SCSS를 이용한 스타일링
+3.  새로고침 시 store에 있는 데이터가 날라가는 현상 수정
+4.  회원가입 이메일 체크, 비밀번호 체크 와 스타일링
 
 ## 프로젝트 후기
 
 리엑트 프로젝트를 하면서 리엑트에 대해 잘 모르고 하였지만 리엑트로 CRUD 즉 create,read,update,delete를 구현 하면서 많이 리엑트를 배우게 되었다.
-
-g
