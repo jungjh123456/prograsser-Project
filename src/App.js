@@ -16,6 +16,9 @@ import persistStore from '../node_modules/redux-persist/es/persistStore';
 import { PersistGate } from 'redux-persist/integration/react';
 import MyModal from './ModalPortal/MyModal/MyModal';
 import RoutineContainer from './containers/RoutineContainer';
+import { Provider as MoxProvider } from 'mobx-react';
+import routineStore from './mobx/routineStore';
+import MobxNewRoutineContainer from './containers/MobxNewRoutineContainer';
 
 const history = createBrowserHistory();
 const sagaMiddleware = createSagaMiddleware();
@@ -32,25 +35,28 @@ const store = createStore(
 );
 sagaMiddleware.run(rootSaga);
 
+const RoutineStore = new routineStore();
 const persistor = persistStore(store);
 
 function App() {
   return (
-    <Provider store={store}>
-      <PersistGate loading={null} persistor={persistor}>
-        <div className="App">
-          <ConnectedRouter history={history}>
-            <Switch>
-              <Route path="/login" component={LoginContainer} />
-              <Route path="/newroutine" component={NewRoutineContainer} />
-              <Route path="/signup" component={SignContainer} />
-              <Route path="/" exact component={RoutineContainer} />
-            </Switch>
-          </ConnectedRouter>
-        </div>
-        {/* <MyModal /> */}
-      </PersistGate>
-    </Provider>
+    <MoxProvider RoutineStore={RoutineStore}>
+      <Provider store={store}>
+        <PersistGate loading={null} persistor={persistor}>
+          <div className="App">
+            <ConnectedRouter history={history}>
+              <Switch>
+                <Route path="/login" component={LoginContainer} />
+                <Route path="/newroutine" component={MobxNewRoutineContainer} />
+                <Route path="/signup" component={SignContainer} />
+                <Route path="/" exact component={RoutineContainer} />
+              </Switch>
+            </ConnectedRouter>
+          </div>
+          {/* <MyModal /> */}
+        </PersistGate>
+      </Provider>
+    </MoxProvider>
   );
 }
 

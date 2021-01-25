@@ -6,6 +6,7 @@ import { IoIosArrowRoundForward } from 'react-icons/io';
 import date from 'date-and-time';
 
 const NewRoutine = ({ onRoutine, history }) => {
+  console.log(onRoutine);
   const form = useRef();
   const audio = useRef();
 
